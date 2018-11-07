@@ -15,7 +15,14 @@ import (
 func Main1107() {
 	// randomtest()
 	// md5test()
-	sha256testfile()
+	// sha256testfile()
+
+	fmt.Println(testappend(nil))
+}
+
+func testappend(in []byte) []byte {
+	tailArr := [3]byte{'1', '2', '3'}
+	return append(in, tailArr[:]...)
 }
 
 func randomtest() {
