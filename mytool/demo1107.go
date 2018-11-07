@@ -1,6 +1,7 @@
 package mytool
 
 import (
+	"bufio"
 	"crypto/md5"
 	"crypto/sha256"
 	"encoding/hex"
@@ -17,12 +18,37 @@ func Main1107() {
 	// md5test()
 	// sha256testfile()
 
-	fmt.Println(testappend(nil))
+	// fmt.Println(testappend(nil))
+
+	fmttest()
 }
 
 func testappend(in []byte) []byte {
 	tailArr := [3]byte{'1', '2', '3'}
 	return append(in, tailArr[:]...)
+}
+
+func fmttest() {
+	tmpstr := fmt.Sprintf("%d -- %t -- %s", 12, true, "hello world! ")
+	fmt.Println(tmpstr)
+
+	tailArr := [3]byte{'a', 'b', 'c'}
+	tmpstr = fmt.Sprint(tailArr)
+	fmt.Println(tmpstr)
+
+	tmpstr = fmt.Sprint(9, 0, 7)
+	fmt.Println(tmpstr)
+
+	outfile, err := os.Create("/Users/allen/Desktop/ttt.txt")
+	if err != nil {
+		return
+	}
+	defer outfile.Close()
+	fmt.Fprintf(outfile, "%d -- %t -- %s", 12, true, "hello world! ")
+
+	buf := bufio.NewWriter(outfile)
+	fmt.Fprintf(buf, "%d -- %t -- %s", 132, true, "hello world!wwwww ")
+	buf.Flush()
 }
 
 func randomtest() {
