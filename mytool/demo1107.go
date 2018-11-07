@@ -39,7 +39,7 @@ func fmttest() {
 	tmpstr = fmt.Sprint(9, 0, 7)
 	fmt.Println(tmpstr)
 
-	outfile, err := os.Create("/Users/allen/Desktop/ttt.txt")
+	outfile, err := os.Create("E:/Temp/ttt.txt")
 	if err != nil {
 		return
 	}
