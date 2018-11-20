@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"gostudy/mytool"
-	"runtime"
 )
 
 func main() {
 	fmt.Println("=====START=====")
-	mytool.Main1108()
+	//mytool.Main1113()
 	// mygin.MainGin()
+	mytool.Main1119()
+	// fmt.Println(runtime.NumCPU())
 
-	fmt.Println(runtime.NumCPU())
 }
