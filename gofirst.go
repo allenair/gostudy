@@ -11,5 +11,4 @@ func main() {
 	// mygin.MainGin()
 	mytool.Main1119()
 	// fmt.Println(runtime.NumCPU())
-
 }
