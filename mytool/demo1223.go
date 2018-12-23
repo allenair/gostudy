@@ -83,9 +83,35 @@ func makeListnode(numArr []int) *listNode {
 	return head
 }
 
+func leetcode03(s string) int {
+	keyMap := make(map[int32]int)
+
+	max := 1
+	tmp := 0
+	for _, c := range s {
+		if _, ok := keyMap[c]; !ok {
+			tmp = tmp + 1
+			max = tmp
+
+		} else {
+			tmp = 1
+			for k := range keyMap {
+				delete(keyMap, k)
+			}
+
+		}
+		keyMap[c] = 1
+	}
+
+	return max
+}
+
+//LeetTest Leetcode demo
 func LeetTest() {
+	// Leetcode01
 	// fmt.Println(leetcode01([]int{3, 7, 2, 15}, 9))
 
+	// Leetcode02
 	l1 := makeListnode([]int{2, 4, 3})
 	l2 := makeListnode([]int{5, 6, 4})
 	head := leetcode02(l1, l2)
@@ -93,4 +119,7 @@ func LeetTest() {
 		fmt.Print(head.val, " ")
 		head = head.next
 	}
+
+	// Leetcode03
+	fmt.Println(leetcode03("pwwkew"))
 }

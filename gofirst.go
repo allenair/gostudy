@@ -12,4 +12,5 @@ func main() {
 	// mytool.Main1213()
 	// fmt.Println(runtime.NumCPU())
 	mytool.LeetTest()
+
 }
