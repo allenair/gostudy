@@ -149,6 +149,28 @@ func findMean(A []int, B []int, mean int) float64 {
 	return findMean(A, B[pb:], pa)
 }
 
+func leetcode05(str string) string {
+	n := len(str)
+	flag := true
+	for i := n - 1; i >= 0; i-- {
+		for k := 0; k+i < n; k++ {
+			flag = true
+			for s, e := k, i; s < e; {
+				if str[s] != str[e] {
+					flag = false
+					break
+				}
+				s++
+				e--
+			}
+			if flag {
+				return str[k : i+1]
+			}
+		}
+	}
+	return "ERR"
+}
+
 //LeetTest Leetcode demo
 func LeetTest() {
 	// Leetcode01
@@ -168,4 +190,7 @@ func LeetTest() {
 
 	// Leetcode04
 	fmt.Println(leetcode04([]int{1, 2}, []int{3}))
+
+	// Leetcode05
+	fmt.Println(leetcode05("cbasdfdsacd"))
 }
