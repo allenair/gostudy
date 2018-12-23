@@ -106,6 +106,49 @@ func leetcode03(s string) int {
 	return max
 }
 
+func leetcode04(nums1 []int, nums2 []int) float64 {
+	len1 := len(nums1)
+	len2 := len(nums2)
+
+	if len1 > len2 {
+		nums1, nums2 = nums2, nums1
+	}
+
+	if (len1+len2)%2 == 0 {
+		return (findMean(nums1, nums2, (len1+len2)/2) + findMean(nums1, nums2, (len1+len2)/2+1)) * 0.5
+
+	} else {
+		return findMean(nums1, nums2, (len1+len2+1)/2)
+	}
+}
+
+func findMean(A []int, B []int, mean int) float64 {
+	lenA := len(A)
+
+	if lenA == 0 {
+		return float64(B[mean-1])
+	}
+	if mean == 1 {
+		if A[0] < B[0] {
+			return float64(A[0])
+		}
+		return float64(B[0])
+	}
+
+	pa := mean / 2
+	if pa > lenA {
+		pa = lenA
+	}
+
+	pb := mean - pa
+
+	if A[pa-1] < B[pb-1] {
+		return findMean(A[pa:], B, pb)
+	}
+
+	return findMean(A, B[pb:], pa)
+}
+
 //LeetTest Leetcode demo
 func LeetTest() {
 	// Leetcode01
@@ -122,4 +165,7 @@ func LeetTest() {
 
 	// Leetcode03
 	fmt.Println(leetcode03("pwwkew"))
+
+	// Leetcode04
+	fmt.Println(leetcode04([]int{1, 2}, []int{3}))
 }
