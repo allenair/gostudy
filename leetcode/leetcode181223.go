@@ -1,4 +1,4 @@
-package mytool
+package leetcode
 
 import "fmt"
 
@@ -171,8 +171,8 @@ func leetcode05(str string) string {
 	return "ERR"
 }
 
-//LeetTest Leetcode demo
-func LeetTest() {
+//LeetTest181223 Leetcode demo
+func LeetTest181223() {
 	// Leetcode01
 	// fmt.Println(leetcode01([]int{3, 7, 2, 15}, 9))
 

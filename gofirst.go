@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gostudy/mytool"
+	"gostudy/leetcode"
 )
 
 func main() {
@@ -11,5 +11,5 @@ func main() {
 	// mygin.MainGin()
 	// mytool.Main1213()
 	// fmt.Println(runtime.NumCPU())
-	mytool.LeetTest()
+	leetcode.LeetTest181223()
 }
