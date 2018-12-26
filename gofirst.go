@@ -11,5 +11,6 @@ func main() {
 	// mygin.MainGin()
 	// mytool.Main1213()
 	// fmt.Println(runtime.NumCPU())
-	leetcode.LeetTest181224()
+	leetcode.LeetTest181226()
+
 }
