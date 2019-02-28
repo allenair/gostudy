@@ -16,16 +16,11 @@ func leetcode01(numarr []int, target int) []int {
 	return resArr
 }
 
-type listNode struct {
-	val  int
-	next *listNode
-}
-
-func leetcode02(l1 *listNode, l2 *listNode) *listNode {
+func leetcode02(l1 *ListNode, l2 *ListNode) *ListNode {
 	pomotion := 0
 
-	var head *listNode
-	var rear *listNode
+	var head *ListNode
+	var rear *ListNode
 
 	for l1 != nil || l2 != nil {
 		sum := 0
@@ -46,7 +41,7 @@ func leetcode02(l1 *listNode, l2 *listNode) *listNode {
 			pomotion = 0
 		}
 
-		node := &listNode{sum, nil}
+		node := &ListNode{sum, nil}
 
 		if head == nil {
 			head = node
@@ -58,18 +53,18 @@ func leetcode02(l1 *listNode, l2 *listNode) *listNode {
 	}
 
 	if pomotion > 0 {
-		rear.next = &listNode{pomotion, nil}
+		rear.next = &ListNode{pomotion, nil}
 	}
 
 	return head
 }
 
-func makeListnode(numArr []int) *listNode {
-	var head *listNode
-	var rear *listNode
+func makeListNode(numArr []int) *ListNode {
+	var head *ListNode
+	var rear *ListNode
 
 	for _, val := range numArr {
-		node := &listNode{val, nil}
+		node := &ListNode{val, nil}
 
 		if head == nil {
 			head = node
@@ -177,8 +172,8 @@ func LeetTest181223() {
 	// fmt.Println(leetcode01([]int{3, 7, 2, 15}, 9))
 
 	// Leetcode02
-	l1 := makeListnode([]int{2, 4, 3})
-	l2 := makeListnode([]int{5, 6, 4})
+	l1 := makeListNode([]int{2, 4, 3})
+	l2 := makeListNode([]int{5, 6, 4})
 	head := leetcode02(l1, l2)
 	for head != nil {
 		fmt.Print(head.val, " ")
