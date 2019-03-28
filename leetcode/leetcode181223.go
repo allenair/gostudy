@@ -3,17 +3,16 @@ package leetcode
 import "fmt"
 
 func leetcode01(numarr []int, target int) []int {
-	resArr := make([]int, 0)
 	arrMap := make(map[int]int)
 
-	for index, value := range numarr {
-		arrMap[value] = index
+	for index, value := range nums {
 		if ntindex, ok := arrMap[target-value]; ok {
-			resArr = append(resArr, ntindex, index)
+			return []int{ntindex, index}
+		} else {
+			arrMap[value] = index
 		}
 	}
-
-	return resArr
+	return []int{}
 }
 
 func leetcode02(l1 *ListNode, l2 *ListNode) *ListNode {
