@@ -100,7 +100,7 @@ func leetcode008(str string) int {
 		}
 	}
 
-	var res int64 = 0
+	var res int64
 	for _, n := range numArr {
 		res = res*10 + int64(n-48)
 	}
@@ -108,9 +108,9 @@ func leetcode008(str string) int {
 	if res > math.MaxInt32 {
 		if flag > 0 {
 			return math.MaxInt32
-		} else {
-			return math.MinInt32
 		}
+		return math.MinInt32
+
 	}
 
 	return int(res) * flag

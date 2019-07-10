@@ -128,9 +128,8 @@ func leetcode020(s string) bool {
 			case '}', ']', ')':
 				if c == '}' && last != '{' || c == ')' && last != ')' || c == ']' && last != '[' {
 					return false
-				} else {
-					stack = stack[:len(stack)-1]
 				}
+				stack = stack[:len(stack)-1]
 			}
 		}
 	}
