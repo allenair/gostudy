@@ -5,7 +5,7 @@ import "fmt"
 func leetcode01(numarr []int, target int) []int {
 	arrMap := make(map[int]int)
 
-	for index, value := range nums {
+	for index, value := range numarr {
 		if ntindex, ok := arrMap[target-value]; ok {
 			return []int{ntindex, index}
 		} else {
