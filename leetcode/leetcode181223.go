@@ -110,10 +110,8 @@ func leetcode04(nums1 []int, nums2 []int) float64 {
 
 	if (len1+len2)%2 == 0 {
 		return (findMean(nums1, nums2, (len1+len2)/2) + findMean(nums1, nums2, (len1+len2)/2+1)) * 0.5
-
-	} else {
-		return findMean(nums1, nums2, (len1+len2+1)/2)
 	}
+	return findMean(nums1, nums2, (len1+len2+1)/2)
 }
 
 func findMean(A []int, B []int, mean int) float64 {
