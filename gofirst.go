@@ -20,6 +20,5 @@ func test() {
 	nums := []int{2, 4, 1, 3, 55, 2, 1, 3333, 21, 34}
 
 	sort.Ints(nums)
-
 	fmt.Println(nums)
 }
