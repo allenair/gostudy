@@ -16,6 +16,7 @@ func LeetTest190228() {
 		fmt.Printf("%d  ", res.val)
 		res = res.next
 	}
+
 }
 
 // 21
