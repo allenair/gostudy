@@ -16,28 +16,28 @@ import (
 )
 
 const (
-	post_url = "http://10.98.202.84:9876/util/sendsms.do"
+	postURL = "http://10.98.202.84:9876/util/sendsms.do"
 	// threshold number of cpu core
 	highNum = 15
 )
 
 var (
 	// how many times of continuous exceed threshold (6 times)
-	count int = 0
-	lastTime time.Time
-	smsSendFlag bool = false
+	count       = 0
+	lastTime    time.Time
+	smsSendFlag = false
 
 	phoneNums string
 	cpuSample int
 	memSample int
-	cpuRate float64
-	sendFlag bool
+	cpuRate   float64
+	sendFlag  bool
 
 	logcpu *log.Logger
 	logmem *log.Logger
 )
 
-
+// WarnInfo sms info content
 type WarnInfo struct {
 	ip      string
 	overNum int
@@ -50,7 +50,7 @@ func main() {
 	flag.IntVar(&cpuSample, "c", 60, "sampling interval seconds")
 	flag.IntVar(&memSample, "m", 300, "sampling interval seconds")
 	flag.Float64Var(&cpuRate, "cp", 70.0, "CPU useage rate")
-	flag.BoolVar(&sendFlag,"ts", false, "Test send sms message")
+	flag.BoolVar(&sendFlag, "ts", false, "Test send sms message")
 	flag.Parse()
 
 	smsSendFlag = false
@@ -65,26 +65,26 @@ func main() {
 		return
 	}
 
-	warnBean := WarnInfo{getIntranetIp(), 0, 0.0, 0.0}
+	warnBean := WarnInfo{getIntranetIP(), 0, 0.0, 0.0}
 
 	if sendFlag {
 		sendSms(&warnBean)
 		return
 
 	} else {
-		go getCpuInfo(&warnBean)
+		go getCPUInfo(&warnBean)
 
 		getMemInfo(&warnBean)
 	}
 }
 
 func initLogger() bool {
-	fileCpu, err := os.OpenFile("d:/cpu"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
+	fileCPU, err := os.OpenFile("d:/cpu"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return false
 	}
-	logcpu = log.New(fileCpu, "", log.LstdFlags|log.Llongfile)
+	logcpu = log.New(fileCPU, "", log.LstdFlags|log.Llongfile)
 	logcpu.SetFlags(log.Ltime)
 
 	fileMem, err := os.OpenFile("d:/mem"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
@@ -98,7 +98,7 @@ func initLogger() bool {
 	return true
 }
 
-func getCpuInfo(warnBean *WarnInfo) {
+func getCPUInfo(warnBean *WarnInfo) {
 	for {
 		res, _ := cpu.Percent(time.Duration(cpuSample)*time.Second, true)
 		total := 0.0
@@ -107,7 +107,7 @@ func getCpuInfo(warnBean *WarnInfo) {
 		for i := 0; i < len(res); i++ {
 			line = append(line, fmt.Sprintf("%4.2f", res[i]))
 			if res[i] > cpuRate {
-				innerNum += 1
+				innerNum++
 			}
 			total += res[i]
 		}
@@ -115,7 +115,7 @@ func getCpuInfo(warnBean *WarnInfo) {
 		logcpu.Println(strings.Join(line, "\t"))
 
 		if innerNum >= highNum {
-			count += 1
+			count++
 		} else {
 			count = 0
 		}
@@ -150,7 +150,7 @@ func sendSms(warnBean *WarnInfo) {
 		content := fmt.Sprintf("[Alarm] Server %s Alarm, cpu_total_rate %6.2f%%, mem_usage_rate %6.2f%%, core_over_num %d", warnBean.ip, warnBean.cpuSum, warnBean.memRate, warnBean.overNum)
 
 		//把post表单发送给目标服务器
-		res, err := http.PostForm(post_url, url.Values{"phoneNums": {phoneNums}, "content": {content}})
+		res, err := http.PostForm(postURL, url.Values{"phoneNums": {phoneNums}, "content": {content}})
 		if err != nil {
 			fmt.Println(err.Error())
 			return
@@ -162,7 +162,7 @@ func sendSms(warnBean *WarnInfo) {
 	}
 }
 
-func getIntranetIp() string {
+func getIntranetIP() string {
 	addrs, err := net.InterfaceAddrs()
 
 	if err != nil {
