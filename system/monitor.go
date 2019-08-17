@@ -71,11 +71,11 @@ func main() {
 		sendSms(&warnBean)
 		return
 
-	} else {
-		go getCPUInfo(&warnBean)
-
-		getMemInfo(&warnBean)
 	}
+
+	go getCPUInfo(&warnBean)
+
+	getMemInfo(&warnBean)
 }
 
 func initLogger() bool {
