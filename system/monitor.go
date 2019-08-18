@@ -17,6 +17,7 @@ import (
 
 const (
 	postURL = "http://10.98.202.84:9876/util/sendsms.do"
+	logPath = "d:/"
 	// threshold number of cpu core
 	highNum = 15
 )
@@ -79,7 +80,7 @@ func main() {
 }
 
 func initLogger() bool {
-	fileCPU, err := os.OpenFile("d:/cpu"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
+	fileCPU, err := os.OpenFile(logPath+"cpu"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -87,7 +88,7 @@ func initLogger() bool {
 	logcpu = log.New(fileCPU, "", log.LstdFlags|log.Llongfile)
 	logcpu.SetFlags(log.Ltime)
 
-	fileMem, err := os.OpenFile("d:/mem"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
+	fileMem, err := os.OpenFile(logPath+"mem"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return false
