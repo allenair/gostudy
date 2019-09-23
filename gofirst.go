@@ -7,14 +7,13 @@ import (
 
 func main() {
 	fmt.Println("=====START=====")
-	// 	//mytool.Main1113()
-	// 	// mygin.MainGin()
-	// 	// mytool.Main1213()
-	// 	// fmt.Println(runtime.NumCPU())
-	// 	// leetcode.LeetTest190228()
+	//mytool.Main1113()
+	// mygin.MainGin()
+	// mytool.Main1213()
+	// fmt.Println(runtime.NumCPU())
+	// leetcode.LeetTest190228()
 
-	// 	// test()
-	fmt.Println("====END====")
+	// test()
 }
 
 func test() {
