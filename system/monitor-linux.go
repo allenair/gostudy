@@ -12,35 +12,26 @@ import (
 	"github.com/shirou/gopsutil/mem"
 )
 
-const (
-	logPath = "/Users/allen/"
-	// threshold number of cpu core
-	highNum = 15
-)
-
 var (
-	// how many times of continuous exceed threshold (6 times)
-	count    = 0
 	lastTime time.Time
 
+	logPath   string
 	cpuSample int
 	memSample int
-	cpuRate   float64
-	sendFlag  bool
 
 	logcpu *log.Logger
 	logmem *log.Logger
 )
 
 func main() {
-	flag.IntVar(&cpuSample, "c", 60, "sampling interval seconds")
+	flag.StringVar(&logPath, "p", "/zxtech/", "log file path")
+	flag.IntVar(&cpuSample, "c", 300, "sampling interval seconds")
 	flag.IntVar(&memSample, "m", 300, "sampling interval seconds")
-	flag.Float64Var(&cpuRate, "cp", 70.0, "CPU useage rate")
 	flag.Parse()
 
+	fmt.Printf("logPath: %v\n", logPath)
 	fmt.Printf("cpuSample: %v\n", cpuSample)
 	fmt.Printf("memSample: %v\n", memSample)
-	fmt.Printf("cpuRate: %v\n", cpuRate)
 
 	if !initLogger() {
 		return
@@ -57,16 +48,14 @@ func initLogger() bool {
 		fmt.Println(err)
 		return false
 	}
-	logcpu = log.New(fileCPU, "", log.LstdFlags|log.Llongfile)
-	logcpu.SetFlags(log.LstdFlags)
+	logcpu = log.New(fileCPU, "", log.LstdFlags)
 
 	fileMem, err := os.OpenFile(logPath+"mem"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return false
 	}
-	logmem = log.New(fileMem, "", log.LstdFlags|log.Llongfile)
-	logmem.SetFlags(log.LstdFlags)
+	logmem = log.New(fileMem, "", log.LstdFlags)
 
 	return true
 }

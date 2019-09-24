@@ -85,16 +85,14 @@ func initLogger() bool {
 		fmt.Println(err)
 		return false
 	}
-	logcpu = log.New(fileCPU, "", log.LstdFlags|log.Llongfile)
-	logcpu.SetFlags(log.Ltime)
+	logcpu = log.New(fileCPU, "", log.LstdFlags)
 
 	fileMem, err := os.OpenFile(logPath+"mem"+getNowDate()+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return false
 	}
-	logmem = log.New(fileMem, "", log.LstdFlags|log.Llongfile)
-	logmem.SetFlags(log.Ltime)
+	logmem = log.New(fileMem, "", log.LstdFlags)
 
 	return true
 }
